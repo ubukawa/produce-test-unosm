@@ -1,5 +1,4 @@
 {
-  host: localhost
   wtpsThreshold: 50
   monitorPeriod: 10
   Z: 6
@@ -7,10 +6,16 @@
   concurrentE: 2
   maxRetries: 5
   retryDelay: 5000
-  port: 5432
-  dbUser: postgress
-  dbPassword: ABCDEFG
-  skipSea: yes
+  pgdb1: sde_pg_3
+  host1: localhost
+  port1: 5432
+  dbUser1: postgress
+  dbPassword1: ABCDEFG
+  pgdb2: un_base
+  host2: localhost
+  port2: 5432
+  dbUser2: postgress
+  dbPassword2: ABCDEFG
   relations: [
 sde_pg_3::vectortile::ferries_all_l              
 sde_pg_3::vectortile::landuse_naturallarge_a     

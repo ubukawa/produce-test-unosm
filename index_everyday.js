@@ -14,13 +14,19 @@ const DailyRotateFile = require('winston-daily-rotate-file')
 const modify = require('./modify.js')
 
 // config constants
-const host = config.get('host')
-const port = config.get('port') 
+const pgdb1 = config.get('pgdb1')
+const host1 = config.get('host1')
+const port1 = config.get('port1') 
+const dbUser1 = config.get('dbUser1')
+const dbPassword1 = config.get('dbPassword1')
+const pgdb2 = config.get('pgdb2')
+const host2 = config.get('host2')
+const port2 = config.get('port2')
+const dbUser2 = config.get('dbUser2')
+const dbPassword2 = config.get('dbPassword2')
 const wtpsThreshold = config.get('wtpsThreshold')
 const monitorPeriod = config.get('monitorPeriod')
 const Z = config.get('Z')
-const dbUser = config.get('dbUser')
-const dbPassword = config.get('dbPassword')
 const relations = config.get('relations')
 const defaultDate = new Date(config.get('defaultDate'))
 //const mbtilesDir = config.get('mbtilesDir') 
@@ -144,15 +150,35 @@ const dumpAndModify = async (bbox, relation, downstream, moduleKey) => {
     const startTime = new Date()
 //    const [database, table] = relation.split('::')
     const [database, schema, table] = relation.split('::')
-    if (!pools[database]) {
+
+//    if (!pools[database]) {
+//      pools[database] = new Pool({
+//        host: host,
+//        user: dbUser,
+//        port: port,
+//        password: dbPassword,
+//        database: database
+//      })
+//    }
+
+    if (database == pgdb1) {
       pools[database] = new Pool({
-        host: host,
-        user: dbUser,
-        port: port,
-        password: dbPassword,
+        host: host1,
+        user: dbUser1,
+        port: port1,
+        password: dbPassword1,
+        database: database
+      })
+    } else {
+      pools[database] = new Pool({
+        host: host2,
+        user: dbUser2,
+        port: port2,
+        password: dbPassword2,
         database: database
       })
     }
+
     pools[database].connect(async (err, client, release) => {
       if (err) throw err
       let sql = `
