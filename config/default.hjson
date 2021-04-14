@@ -6,16 +6,22 @@
   concurrentE: 2
   maxRetries: 5
   retryDelay: 5000
-  pgdb1: sde_pg_3
-  host1: localhost
-  port1: 5432
-  dbUser1: postgress
-  dbPassword1: ABCDEFG
-  pgdb2: un_base
-  host2: localhost
-  port2: 5432
-  dbUser2: postgress
-  dbPassword2: ABCDEFG
+  host: {
+   sde_pg_3: localhost
+   un_base: localhost
+  }
+  port: {
+   sde_pg_3: 5433
+   un_base: 5433
+  }
+  dbUser: {
+   sde_pg_3: user1
+   un_base: user2
+  }
+  dbPassword: {
+   sde_pg_3: password1
+   un_base: password2
+  }
   relations: [
 sde_pg_3::vectortile::ferries_all_l              
 sde_pg_3::vectortile::landuse_naturallarge_a     
